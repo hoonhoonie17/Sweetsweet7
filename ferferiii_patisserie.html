@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FERFERIII'S PATISSERIE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 15% 15%,rgba(255,245,218,.8),transparent 30%),radial-gradient(circle at 85% 85%,rgba(112,76,48,.25),transparent 35%),#bda47d;font-family:"Vazirmatn",sans-serif}
+.scene{width:350px;height:550px;perspective:1800px}
+.card{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .85s cubic-bezier(.2,.75,.2,1)}
+.card.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;width:100%;height:100%;border-radius:18px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#f4e6cb;border:8px solid #4a2c20;box-shadow:0 22px 50px rgba(45,25,15,.35),inset 0 0 0 2px #c29a61,inset 0 0 0 6px #ead5ad}
+.front{z-index:2}.back{transform:rotateY(180deg)}
+.paper{position:absolute;inset:12px;border:1px solid #b79361;pointer-events:none}
+.paper:before{content:"";position:absolute;top:-1px;left:50%;width:45%;height:1px;transform:translateX(-50%);background:#b79361}
+.front-content{position:relative;height:100%;padding:19px;display:flex;flex-direction:column}
+.brand{text-align:center;font-family:"DM Serif Display",serif;direction:ltr;letter-spacing:3px;font-size:14px;color:#704633}
+.title{margin-top:3px;text-align:center;font-family:"DM Serif Display",serif;font-size:29px;color:#47281c}
+.subtitle{margin-top:1px;text-align:center;color:#927153;font-size:9px;letter-spacing:1px}
+.divider{width:80%;height:1px;background:#b28a59;margin:9px auto 6px}
+.ferferi-frame{position:relative;width:205px;height:245px;margin:2px auto 5px;display:flex;align-items:center;justify-content:center;border:1px solid #a8895f;background:radial-gradient(ellipse at center,#fff9eb 0%,#f0dfbd 65%,#d8bc8d 100%);border-radius:50% / 46%;box-shadow:0 8px 18px rgba(75,48,28,.17),inset 0 0 0 4px rgba(255,255,255,.35);overflow:hidden}
+.ferferi-frame .star{position:absolute;color:#a17b51;z-index:5;font-family:serif}
+.star.s1{top:12px;left:17px;font-size:15px}.star.s2{top:24px;right:18px;font-size:10px}.star.s3{bottom:17px;right:21px;font-size:14px}.star.s4{bottom:25px;left:19px;font-size:10px}
+.ferferi-svg{width:100%;height:100%;display:block}
+.photo-label{text-align:center;font-family:"DM Serif Display",serif;direction:ltr;font-size:10px;letter-spacing:2px;color:#806044;margin-bottom:4px}
+.tags{display:flex;justify-content:center;flex-wrap:wrap;gap:4px;margin-top:3px}
+.tag{padding:3px 7px;border-radius:20px;border:1px solid #b79568;color:#60402f;background:#f8eedc;font-size:7.5px}
+.front-bottom{margin-top:auto;text-align:center}
+.one-of-one{font-family:"DM Serif Display",serif;direction:ltr;color:#754a34;font-size:11px;letter-spacing:1px}
+.stars{color:#aa7a3d;letter-spacing:4px;margin:2px 0 4px}
+.flip-button{position:relative;z-index:999;display:inline-flex;align-items:center;justify-content:center;border:0;padding:9px 19px;min-width:135px;border-radius:30px;background:#583325;color:#fff0d5;font-family:"Vazirmatn",sans-serif;font-size:10px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;box-shadow:0 5px 12px rgba(45,23,14,.25)}
+.flip-button:active{transform:scale(.94)}
+.back-content{position:relative;height:100%;padding:18px 20px;display:flex;flex-direction:column}
+.back-brand{text-align:center;font-family:"DM Serif Display",serif;direction:ltr;letter-spacing:2px;color:#704633;font-size:14px}
+.back-title{text-align:center;font-family:"DM Serif Display",serif;color:#482a1d;font-size:25px;margin-top:3px}
+.back-subtitle{text-align:center;color:#8b684c;font-size:8px;margin-top:1px}
+.recipe-line{width:80%;height:1px;background:#b28a59;margin:8px auto}
+.section-title{text-align:center;font-family:"DM Serif Display",serif;direction:ltr;color:#70432f;font-size:15px;margin-bottom:5px}
+.ingredients-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:2px 8px}
+.ingredients-list li{font-size:7.6px;line-height:1.5;color:#57392b}
+.ingredients-list li:before{content:"✦";color:#aa793e;margin-left:3px}
+.instructions{margin-top:6px}.instructions p{margin:2px 0;font-size:7.6px;line-height:1.55;color:#57392b}
+.result{margin-top:6px;padding:6px 9px;text-align:center;border:1px dashed #9d754d;border-radius:9px;background:#ead6b3}
+.result-title{font-family:"DM Serif Display",serif;direction:ltr;color:#683c29;font-size:14px}
+.result p{margin:2px 0 0;font-size:7.8px;line-height:1.55;color:#593a2a}
+.note{margin-top:auto;text-align:center;color:#806049;font-size:7px;line-height:1.5;padding:3px 10px}
+.card-number{text-align:center;direction:ltr;font-family:"DM Serif Display",serif;color:#987552;font-size:7px;letter-spacing:2px;margin-bottom:5px}
+@media(max-width:380px){.scene{width:335px;height:535px}.front-content,.back-content{padding:16px}.ferferi-frame{width:195px;height:230px}.title{font-size:27px}.tags{gap:3px}}
+</style>
+</head>
+<body>
+<div class="scene">
+<div class="card" id="card">
+<section class="face front">
+<div class="paper"></div>
+<div class="front-content">
+<div class="brand">FERFERIII'S PATISSERIE</div>
+<div class="title">دسر شکلاتی فرفری</div>
+<div class="subtitle">SPECIAL HANDMADE RECIPE • EST. 2010</div>
+<div class="divider"></div>
+<div class="ferferi-frame">
+<span class="star s1">✦</span><span class="star s2">✧</span><span class="star s3">✦</span><span class="star s4">✧</span>
+<svg class="ferferi-svg" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="110" cy="130" rx="98" ry="118" fill="#ead8b8"/>
+<path d="M55 105C35 94 39 67 57 62C43 45 61 27 78 34C80 15 105 15 113 31C126 12 149 23 145 42C166 31 183 51 168 68C190 76 183 101 166 108C177 133 160 157 143 158L77 158C56 153 42 130 55 105Z" fill="#563526"/>
+<circle cx="57" cy="76" r="17" fill="#62402f"/><circle cx="74" cy="47" r="16" fill="#62402f"/><circle cx="101" cy="39" r="17" fill="#62402f"/><circle cx="129" cy="43" r="17" fill="#62402f"/><circle cx="153" cy="61" r="17" fill="#62402f"/><circle cx="166" cy="88" r="17" fill="#62402f"/><circle cx="55" cy="109" r="16" fill="#62402f"/><circle cx="165" cy="115" r="16" fill="#62402f"/>
+<path d="M110 52C91 52 76 64 69 84C64 99 65 117 72 133C79 148 91 160 110 175C129 160 141 148 148 133C155 117 156 99 151 84C144 64 129 52 110 52Z" fill="#e7b99a"/>
+<ellipse cx="66" cy="112" rx="8" ry="14" fill="#dda989"/><ellipse cx="154" cy="112" rx="8" ry="14" fill="#dda989"/>
+<path d="M78 96 Q88 90 98 96" fill="none" stroke="#633f30" stroke-width="3" stroke-linecap="round"/><path d="M122 96 Q132 90 142 96" fill="none" stroke="#633f30" stroke-width="3" stroke-linecap="round"/>
+<ellipse cx="88" cy="111" rx="8" ry="10" fill="#493027"/><ellipse cx="132" cy="111" rx="8" ry="10" fill="#493027"/>
+<text x="85" y="114" font-size="5.5" fill="#fff4d6">✦</text><text x="129" y="114" font-size="5.5" fill="#fff4d6">✦</text>
+<circle cx="93" cy="106" r="1.4" fill="#fff4d6"/><circle cx="137" cy="106" r="1.4" fill="#fff4d6"/>
+<path d="M107 121Q110 118 113 121Q111 126 110 126Q108 126 107 121Z" fill="#9b6250"/>
+<path d="M99 133 Q110 143 121 133" fill="none" stroke="#814d43" stroke-width="3" stroke-linecap="round"/>
+<path d="M105 135L105 141Q110 144 115 141L115 135Z" fill="#fff9e8"/>
+<ellipse cx="77" cy="128" rx="10" ry="5" fill="#d98e7b" opacity=".38"/><ellipse cx="143" cy="128" rx="10" ry="5" fill="#d98e7b" opacity=".38"/>
+<path d="M94 165L94 185L126 185L126 165" fill="#e7b99a"/>
+<path d="M92 176C75 181 58 202 52 239L168 239C162 202 145 181 128 176C122 185 98 185 92 176Z" fill="#49342d"/>
+<path d="M92 176L110 194L128 176Q119 182 110 183Q101 182 92 176Z" fill="#f3e5cb"/>
+<ellipse cx="68" cy="211" rx="13" ry="19" fill="#e7b99a" transform="rotate(18 68 211)"/><ellipse cx="152" cy="211" rx="13" ry="19" fill="#e7b99a" transform="rotate(-18 152 211)"/>
+<g transform="translate(148 195)"><rect x="0" y="8" width="25" height="19" rx="4" fill="#8a5b40"/><path d="M25 13Q36 13 31 22Q28 26 25 24" fill="none" stroke="#8a5b40" stroke-width="4"/><ellipse cx="12" cy="8" rx="13" ry="4" fill="#5a3425"/><path d="M8 2Q3 -5 9 -11" fill="none" stroke="#a17b51" stroke-width="2" stroke-linecap="round"/><path d="M16 2Q22 -5 16 -11" fill="none" stroke="#a17b51" stroke-width="2" stroke-linecap="round"/></g>
+<circle cx="52" cy="221" r="9" fill="#d9b94f"/><path d="M47 218L57 224M57 218L47 224" stroke="#f3df8a" stroke-width="2"/>
+</svg>
+</div>
+<div class="photo-label">FERFERIII • ONE OF A KIND</div>
+<div class="tags"><span class="tag">☕ قهوه</span><span class="tag">🍂 پاییز</span><span class="tag">🍋 لیمو</span><span class="tag">دارچین</span><span class="tag">❄️ برف</span><span class="tag">🌧️ بارون</span></div>
+<div class="front-bottom"><div class="one-of-one">ONE OF A KIND • EXTRA SPECIAL</div><div class="stars">★ ★ ★</div><button class="flip-button" type="button" onclick="showBack()">↻ برگردون کارت</button></div>
+</div>
+</section>
+<section class="face back">
+<div class="paper"></div>
+<div class="back-content">
+<div class="back-brand">FERFERIII'S PATISSERIE</div>
+<div class="back-title">دستور تهیه فرفری</div>
+<div class="back-subtitle">یک دستور قدیمی برای یک آدم کاملاً غیرقابل‌تکرار</div>
+<div class="recipe-line"></div>
+<div class="section-title">INGREDIENTS</div>
+<ul class="ingredients-list">
+<li>فرفری، به مقدار لازم</li><li>چشم‌های ستاره‌ای ⭐</li><li>خوشگلی، فراوان</li><li>مهربونی، نامحدود</li><li>علاقه‌های خاص</li><li>لیمو و دارچین 🍋</li><li>قهوه ☕</li><li>هری پاتر ✨</li><li>صورت آهویی 🦌</li><li>دست‌های ناز</li><li>دندون‌های همستری 🐹</li><li>عاشق برف و بارون بودن</li><li>قناد و سرآشپز بودن</li><li>نویسنده بودن</li><li>سلیقه موسیقی قشنگ</li>
+</ul>
+<div class="instructions">
+<div class="section-title">HOW TO MAKE A FERFERIII</div>
+<p>ابتدا فرفری را با مقدار زیادی مهربونی و خوشگلی مخلوط کنید.</p>
+<p>چشم‌های ستاره‌ای، صورت آهویی و دندون‌های همستری را با احتیاط اضافه کنید.</p>
+<p>قهوه، لیمو، دارچین، هری پاتر، برف و بارون و موسیقی خوب را اضافه کنید.</p>
+<p>در آخر قنادی، آشپزی و نویسندگی را اضافه کرده و خوب هم بزنید تا کاملاً فرفری شود.</p>
+</div>
+<div class="result"><div class="result-title">🍓 FINAL RESULT 🍫</div><p>از فر بیرون بیاورید، شکلات آب‌شده بریزید، با توت‌فرنگی تزئین کنید و...<br><strong>نوش جاننن 🤎</strong></p></div>
+<div class="note"><strong>یادداشت سرآشپز:</strong><br>این دستور فقط یک بار در جهان درست شده؛ لطفاً سعی نکنید نسخه‌ی دیگری از آن تهیه کنید. نتیجه احتمالاً فرفری نمی‌شود. ✨</div>
+<div class="card-number">FERFERIII • SPECIAL EDITION • 001/001</div>
+<button class="flip-button" type="button" onclick="showFront()">↩ برگرد به روی کارت</button>
+</div>
+</section>
+</div>
+</div>
+<script>
+const card = document.getElementById("card");
+function showBack(){card.classList.add("flipped")}
+function showFront(){card.classList.remove("flipped")}
+document.addEventListener("keydown",function(event){
+if(event.key==="Escape")showFront();
+if(event.key==="Enter"){if(card.classList.contains("flipped"))showFront();else showBack();}
+});
+</script>
+</body>
+</html>
